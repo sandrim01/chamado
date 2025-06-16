@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Chamados</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <img src="/static/logo_unbug.png" alt="Logo Unbug Solutions TI" class="logo-unbug">
+        <h1>Controle de Chamados</h1>
+        
+        <div class="menu-nav">
+            <a href="/">Início</a>
+            {% if current_user.is_authenticated %}
+                <span>Bem-vindo, {{ current_user.nome }} ({{ current_user.papel }})</span>
+                <a href="/logout">Sair</a>
+                {% if current_user.papel == 'admin' %}
+                    <a href="/cadastro">Cadastrar Usuário</a>
+                {% endif %}
+            {% else %}
+                <a href="/login">Login</a>
+            {% endif %}
+        </div>
+        
+        <form action="/abrir" method="post" class="form-chamado">
+            <input type="text" name="titulo" placeholder="Título" required><br>
+            <textarea name="descricao" placeholder="Descrição" required></textarea><br>
+            <input type="text" name="solicitante" placeholder="Solicitante" required><br>
+            <button type="submit">Abrir Chamado</button>
+        </form>
+        <h2>Lista de Chamados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                    <th>Solicitante</th>
+                    <th>Status</th>
+                    <th>Criado em</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in chamados %}
+                <tr>
+                    <td>{{ c[0] }}</td>
+                    <td>{{ c[1] }}</td>
+                    <td>{{ c[2] }}</td>
+                    <td>{{ c[3] }}</td>
+                    <td>{{ c[4] }}</td>
+                    <td>{{ c[5] }}</td>
+                    <td>
+                        {% if c[4] != 'fechado' %}
+                        <form action="/fechar/{{ c[0] }}" method="post" style="display:inline;">
+                            <button type="submit">Fechar</button>
+                        </form>
+                        {% endif %}
+                        <form action="/excluir/{{ c[0] }}" method="post" style="display:inline;">
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

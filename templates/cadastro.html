@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Usuário - Controle de Chamados</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container" style="max-width: 400px;">
+        <img src="/static/logo_unbug.png" alt="Logo Unbug Solutions TI" class="logo-unbug">
+        <h1>Cadastro de Usuário</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form method="post" class="form-chamado">
+            <input type="text" name="nome" placeholder="Nome completo" required><br>
+            <input type="text" name="username" placeholder="Usuário" required><br>
+            <input type="password" name="password" placeholder="Senha" required><br>
+            <select name="papel" required>
+                <option value="cliente">Cliente</option>
+                <option value="funcionario">Funcionário</option>
+                <option value="admin">Administrador</option>
+            </select><br>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <div style="text-align:center;margin-top:10px;">
+            <a href="/login">Voltar para login</a>
+        </div>
+    </div>
+</body>
+</html>
