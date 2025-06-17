@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(135deg, #0a2a43 0%, #1e5a7a 100%);
+    background: #10173a;
     font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
     min-height: 100vh;
     margin: 0;
@@ -22,7 +22,7 @@ h1, h2 {
 }
 form.form-chamado {
     margin-bottom: 32px;
-    text-align: center;
+    text-align: left;
     background: rgba(62,198,224,0.07);
     padding: 18px 0 10px 0;
     border-radius: 10px;
@@ -122,6 +122,25 @@ tr:nth-child(odd) {
     color: #b6ff00;
     font-size: 1rem;
     font-weight: 500;
+}
+.btn-login {
+    padding: 10px 32px;
+    border: none;
+    background: linear-gradient(90deg, #3ec6e0 0%, #b6ff00 100%);
+    color: #0a2a43;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px 0 rgba(62,198,224,0.15);
+    transition: background 0.2s, color 0.2s;
+    margin-left: 0;
+    margin-top: 8px;
+    display: block;
+}
+.btn-login:hover {
+    background: linear-gradient(90deg, #b6ff00 0%, #3ec6e0 100%);
+    color: #122c3d;
 }
 @media (max-width: 700px) {
     .container {

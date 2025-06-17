@@ -13,17 +13,17 @@
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
             {% for category, message in messages %}
-              <div class="flash {{ category }}">{{ message }}</div>
+              <div class="flash {{ category }}">{{ message | replace('Login realizado com sucesso!', 'Bem-vindo! Login efetuado com sucesso.') | replace('Logout realizado com sucesso!', 'Você saiu do sistema com sucesso.') }}</div>
             {% endfor %}
           {% endif %}
         {% endwith %}
         <form method="post" class="form-chamado">
             <input type="text" name="username" placeholder="Usuário" required><br>
             <input type="password" name="password" placeholder="Senha" required><br>
-            <label style="font-size: 0.95em;">
-                <input type="checkbox" name="remember_me"> Permanecer logado
-            </label><br>
-            <button type="submit">Entrar</button>
+            <label style="font-size: 1em; color: #3ec6e0; display: block; margin-bottom: 10px;">
+                <input type="checkbox" name="remember_me" style="margin-right: 6px;"> Permanecer conectado neste dispositivo
+            </label>
+            <button type="submit" class="btn-login">Entrar</button>
         </form>
     </div>
 </body>
