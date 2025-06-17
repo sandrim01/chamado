@@ -197,6 +197,20 @@ def cadastro():
             conn.close()
     return render_template('cadastro.html')
 
+@app.route('/usuarios')
+@login_required
+def usuarios():
+    if current_user.papel != 'admin':
+        flash('Apenas administradores podem acessar a lista de usuários.', 'danger')
+        return redirect(url_for('index'))
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT id, username, password_hash, nome, papel FROM users ORDER BY id')
+    usuarios = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template('usuarios.html', usuarios=usuarios)
+
 if __name__ == '__main__':
     create_tables()
     app.run(debug=True, host='0.0.0.0')

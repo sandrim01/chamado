@@ -18,6 +18,7 @@
                 <a href="/logout">Sair</a>
                 {% if current_user.papel == 'admin' %}
                     <a href="/cadastro">Cadastrar Usuário</a>
+                    <a href="/usuarios">Gerenciar Usuários</a>
                 {% endif %}
             {% else %}
                 <a href="/login">Login</a>

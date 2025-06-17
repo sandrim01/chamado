@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciar Usuários - Controle de Chamados</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Usuários Cadastrados</h1>
+        <div class="menu-nav">
+            <a href="/">Início</a>
+            <a href="/cadastro">Cadastrar Usuário</a>
+            <a href="/logout">Sair</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Usuário</th>
+                    <th>Papel</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in usuarios %}
+                <tr>
+                    <td>{{ u[0] }}</td>
+                    <td>{{ u[3] }}</td>
+                    <td>{{ u[1] }}</td>
+                    <td>{{ u[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div style="text-align:center;margin-top:10px;">
+            <a href="/">Voltar</a>
+        </div>
+    </div>
+</body>
+</html>
