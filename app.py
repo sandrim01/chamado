@@ -3,10 +3,12 @@ from flask_login import LoginManager, login_user, logout_user, login_required, U
 from werkzeug.security import generate_password_hash, check_password_hash
 import psycopg2
 import os
+from datetime import timedelta
 
 app = Flask(__name__)
 
 app.secret_key = os.getenv('SECRET_KEY', 'unbug_secret_key')
+app.permanent_session_lifetime = timedelta(days=7)  # 7 dias para sessão permanente
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -140,6 +142,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        remember_me = 'remember_me' in request.form
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute('SELECT id, username, password_hash, nome, papel FROM users WHERE username = %s', (username,))
@@ -149,6 +152,10 @@ def login():
         if user and check_password_hash(user[2], password):
             user_obj = User(user[0], user[1], user[3], user[4])
             login_user(user_obj)
+            if remember_me:
+                session.permanent = True
+            else:
+                session.permanent = False
             flash('Login realizado com sucesso!', 'success')
             return redirect(url_for('index'))
         else:
