@@ -38,27 +38,32 @@
             </div>
             <div class="form-section">
                 <label>💻 Informações do Equipamento</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="tipo_equipamento" value="Desktop"> Desktop</label>
-                    <label><input type="checkbox" name="tipo_equipamento" value="Notebook"> Notebook</label>
-                    <label><input type="checkbox" name="tipo_equipamento" value="Servidor"> Servidor</label>
-                    <label><input type="checkbox" name="tipo_equipamento" value="Impressora"> Impressora</label>
-                    <label><input type="checkbox" name="tipo_equipamento" value="Periférico"> Periférico (Mouse, Teclado etc.)</label>
-                    <label><input type="checkbox" name="tipo_equipamento" value="Outro"> Outro: <input type="text" name="tipo_equipamento_outro" style="width:100px;"></label>
-                </div>
+                <select name="tipo_equipamento" style="width:100%;margin-bottom:8px;">
+                    <option value="">Selecione o tipo de equipamento</option>
+                    <option value="Desktop">Desktop</option>
+                    <option value="Notebook">Notebook</option>
+                    <option value="Servidor">Servidor</option>
+                    <option value="Impressora">Impressora</option>
+                    <option value="Periférico">Periférico (Mouse, Teclado etc.)</option>
+                    <option value="Outro">Outro</option>
+                </select>
+                <input type="text" name="tipo_equipamento_outro" placeholder="Se selecionou 'Outro', especifique aqui" style="width:100%;margin-bottom:8px;">
                 <input type="text" name="marca_modelo" placeholder="Marca e modelo" required><br>
                 <input type="text" name="numero_serie" placeholder="Número de série"><br>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="sistema_operacional" value="Windows"> Windows</label>
-                    <label><input type="checkbox" name="sistema_operacional" value="Linux"> Linux</label>
-                    <label><input type="checkbox" name="sistema_operacional" value="MacOS"> MacOS</label>
-                    <label><input type="checkbox" name="sistema_operacional" value="Outro"> Outro: <input type="text" name="so_outro" style="width:100px;"></label>
-                </div>
-                <div class="checkbox-group">
-                    <label><input type="radio" name="possui_backup" value="Sim" required> Sim</label>
-                    <label><input type="radio" name="possui_backup" value="Não"> Não</label>
-                    <label><input type="radio" name="possui_backup" value="Não se aplica"> Não se aplica</label>
-                </div>
+                <select name="sistema_operacional" style="width:100%;margin-bottom:8px;">
+                    <option value="">Selecione o sistema operacional</option>
+                    <option value="Windows">Windows</option>
+                    <option value="Linux">Linux</option>
+                    <option value="MacOS">MacOS</option>
+                    <option value="Outro">Outro</option>
+                </select>
+                <input type="text" name="so_outro" placeholder="Se selecionou 'Outro', especifique aqui" style="width:100%;margin-bottom:8px;">
+                <select name="possui_backup" style="width:100%;margin-bottom:8px;">
+                    <option value="">Possui backup dos dados?</option>
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                    <option value="Não se aplica">Não se aplica</option>
+                </select>
             </div>
             <div class="form-section">
                 <label>⚠️ Problema Relatado</label>
