@@ -8,9 +8,9 @@
     <style>
         .form-section { margin-bottom: 18px; }
         .form-section label { display: block; margin-bottom: 6px; font-weight: bold; color: #3ec6e0; }
-        .checkbox-group { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
-        .checkbox-group label { font-weight: normal; color: #fff; }
-        .termos label { font-weight: normal; color: #fff; display: block; margin-bottom: 4px; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 24px 18px; margin-bottom: 8px; }
+        .checkbox-group label { font-weight: normal; color: #fff; display: flex; align-items: center; gap: 6px; margin-bottom: 0; }
+        .termos label { font-weight: normal; color: #fff; display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
         .assinatura-area { margin-top: 24px; }
         .assinatura-area input { width: 220px; }
         .assinatura-area label { color: #3ec6e0; font-weight: bold; }
@@ -66,17 +66,18 @@
             </div>
             <div class="form-section">
                 <label>🛠️ Serviços Solicitados</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="servicos[]" value="Formatação / Reinstalação do sistema"> Formatação / Reinstalação do sistema</label>
-                    <label><input type="checkbox" name="servicos[]" value="Remoção de vírus"> Remoção de vírus</label>
-                    <label><input type="checkbox" name="servicos[]" value="Troca de peça / upgrade"> Troca de peça / upgrade</label>
-                    <label><input type="checkbox" name="servicos[]" value="Diagnóstico completo"> Diagnóstico completo</label>
-                    <label><input type="checkbox" name="servicos[]" value="Recuperação de dados"> Recuperação de dados</label>
-                    <label><input type="checkbox" name="servicos[]" value="Configuração de rede / Wi-Fi"> Configuração de rede / Wi-Fi</label>
-                    <label><input type="checkbox" name="servicos[]" value="Instalação de programas"> Instalação de programas</label>
-                    <label><input type="checkbox" name="servicos[]" value="Suporte remoto"> Suporte remoto</label>
-                    <label><input type="checkbox" name="servicos[]" value="Outro"> Outro: <input type="text" name="servico_outro" style="width:120px;"></label>
-                </div>
+                <select name="servicos[]" multiple size="6" style="width:100%;margin-bottom:8px;">
+                    <option value="Formatação / Reinstalação do sistema">Formatação / Reinstalação do sistema</option>
+                    <option value="Remoção de vírus">Remoção de vírus</option>
+                    <option value="Troca de peça / upgrade">Troca de peça / upgrade</option>
+                    <option value="Diagnóstico completo">Diagnóstico completo</option>
+                    <option value="Recuperação de dados">Recuperação de dados</option>
+                    <option value="Configuração de rede / Wi-Fi">Configuração de rede / Wi-Fi</option>
+                    <option value="Instalação de programas">Instalação de programas</option>
+                    <option value="Suporte remoto">Suporte remoto</option>
+                    <option value="Outro">Outro</option>
+                </select>
+                <input type="text" name="servico_outro" placeholder="Se selecionou 'Outro', especifique aqui" style="width:100%;">
             </div>
             <div class="form-section termos">
                 <label>📋 Termos de Autorização</label>
