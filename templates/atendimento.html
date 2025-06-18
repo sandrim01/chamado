@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Atendimento</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+</head>
+<body>
+    <div class="container" style="max-width: 500px;">
+        <h1>Atendimento</h1>
+        <form method="post" class="form-chamado">
+            <input type="text" name="cliente" placeholder="Nome do Cliente" required><br>
+            <input type="text" name="assunto" placeholder="Assunto do Atendimento" required><br>
+            <textarea name="descricao" placeholder="Descrição do Atendimento" required></textarea><br>
+            <button type="submit">Registrar Atendimento</button>
+        </form>
+        <div style="text-align:center;margin-top:10px;">
+            <a href="/">Voltar</a>
+        </div>
+    </div>
+</body>
+</html>

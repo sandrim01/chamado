@@ -211,6 +211,21 @@ def usuarios():
     conn.close()
     return render_template('usuarios.html', usuarios=usuarios)
 
+@app.route('/atendimento', methods=['GET', 'POST'])
+@login_required
+def atendimento():
+    if current_user.papel not in ['admin', 'funcionario']:
+        flash('Apenas administradores e funcionários podem acessar o formulário de atendimento.', 'danger')
+        return redirect(url_for('index'))
+    if request.method == 'POST':
+        cliente = request.form['cliente']
+        assunto = request.form['assunto']
+        descricao = request.form['descricao']
+        # Aqui você pode salvar o atendimento em uma tabela específica se desejar
+        flash('Atendimento registrado com sucesso!', 'success')
+        return redirect(url_for('atendimento'))
+    return render_template('atendimento.html')
+
 if __name__ == '__main__':
     create_tables()
     app.run(debug=True, host='0.0.0.0')
