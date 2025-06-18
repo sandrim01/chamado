@@ -45,6 +45,34 @@ def create_tables():
             usuario_id INTEGER REFERENCES users(id)
         )
     ''')
+    # Tabela de atendimentos detalhados
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS atendimentos (
+            id SERIAL PRIMARY KEY,
+            nome_cliente VARCHAR(255) NOT NULL,
+            cpf_cnpj VARCHAR(30),
+            telefone VARCHAR(30),
+            email VARCHAR(100),
+            endereco VARCHAR(255),
+            empresa VARCHAR(100),
+            tipo_equipamento VARCHAR(100),
+            tipo_equipamento_outro VARCHAR(100),
+            marca_modelo VARCHAR(100),
+            numero_serie VARCHAR(100),
+            sistema_operacional VARCHAR(100),
+            so_outro VARCHAR(100),
+            possui_backup VARCHAR(30),
+            problema_relatado TEXT,
+            servicos TEXT,
+            servico_outro VARCHAR(100),
+            termo_diagnostico BOOLEAN,
+            termo_dados BOOLEAN,
+            termo_prazos BOOLEAN,
+            data_entrada DATE,
+            assinatura_cliente VARCHAR(255),
+            criado_em TIMESTAMP NOT NULL DEFAULT NOW()
+        )
+    ''')
     conn.commit()
     cur.close()
     conn.close()
@@ -218,10 +246,43 @@ def atendimento():
         flash('Apenas administradores e funcionários podem acessar o formulário de atendimento.', 'danger')
         return redirect(url_for('index'))
     if request.method == 'POST':
-        cliente = request.form['cliente']
-        assunto = request.form['assunto']
-        descricao = request.form['descricao']
-        # Aqui você pode salvar o atendimento em uma tabela específica se desejar
+        form = request.form
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('''
+            INSERT INTO atendimentos (
+                nome_cliente, cpf_cnpj, telefone, email, endereco, empresa,
+                tipo_equipamento, tipo_equipamento_outro, marca_modelo, numero_serie,
+                sistema_operacional, so_outro, possui_backup, problema_relatado,
+                servicos, servico_outro, termo_diagnostico, termo_dados, termo_prazos,
+                data_entrada, assinatura_cliente
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ''', (
+            form.get('nome_cliente'),
+            form.get('cpf_cnpj'),
+            form.get('telefone'),
+            form.get('email'),
+            form.get('endereco'),
+            form.get('empresa'),
+            ','.join(form.getlist('tipo_equipamento')),
+            form.get('tipo_equipamento_outro'),
+            form.get('marca_modelo'),
+            form.get('numero_serie'),
+            ','.join(form.getlist('sistema_operacional')),
+            form.get('so_outro'),
+            form.get('possui_backup'),
+            form.get('problema_relatado'),
+            ','.join(form.getlist('servicos[]')),
+            form.get('servico_outro'),
+            bool(form.get('termo_diagnostico')),
+            bool(form.get('termo_dados')),
+            bool(form.get('termo_prazos')),
+            form.get('data_entrada'),
+            form.get('assinatura_cliente')
+        ))
+        conn.commit()
+        cur.close()
+        conn.close()
         flash('Atendimento registrado com sucesso!', 'success')
         return redirect(url_for('atendimento'))
     return render_template('atendimento.html')

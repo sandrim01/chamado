@@ -2,18 +2,95 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Formulário de Atendimento</title>
+    <title>Formulário de Atendimento - Assistência Técnica de TI</title>
     <link rel="stylesheet" href="/static/style.css">
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <style>
+        .form-section { margin-bottom: 18px; }
+        .form-section label { display: block; margin-bottom: 6px; font-weight: bold; color: #3ec6e0; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+        .checkbox-group label { font-weight: normal; color: #fff; }
+        .termos label { font-weight: normal; color: #fff; display: block; margin-bottom: 4px; }
+        .assinatura-area { margin-top: 24px; }
+        .assinatura-area input { width: 220px; }
+        .assinatura-area label { color: #3ec6e0; font-weight: bold; }
+        .print-btn { margin-top: 18px; background: #3ec6e0; color: #0a2a43; font-weight: bold; border-radius: 6px; padding: 8px 24px; border: none; cursor: pointer; }
+        .print-btn:hover { background: #b6ff00; color: #122c3d; }
+    </style>
+    <script>
+        function imprimirFormulario() {
+            window.print();
+        }
+    </script>
 </head>
 <body>
-    <div class="container" style="max-width: 500px;">
-        <h1>Atendimento</h1>
-        <form method="post" class="form-chamado">
-            <input type="text" name="cliente" placeholder="Nome do Cliente" required><br>
-            <input type="text" name="assunto" placeholder="Assunto do Atendimento" required><br>
-            <textarea name="descricao" placeholder="Descrição do Atendimento" required></textarea><br>
+    <div class="container" style="max-width: 650px;">
+        <h1>🧾 Formulário de Atendimento - Assistência Técnica de TI</h1>
+        <form method="post" class="form-chamado" id="formAtendimento">
+            <div class="form-section">
+                <label>🧍‍♂️ Dados do Cliente</label>
+                <input type="text" name="nome_cliente" placeholder="Nome completo" required><br>
+                <input type="text" name="cpf_cnpj" placeholder="CPF/CNPJ" required><br>
+                <input type="text" name="telefone" placeholder="Telefone/WhatsApp" required><br>
+                <input type="email" name="email" placeholder="E-mail" required><br>
+                <input type="text" name="endereco" placeholder="Endereço" required><br>
+                <input type="text" name="empresa" placeholder="Empresa (se aplicável)"><br>
+            </div>
+            <div class="form-section">
+                <label>💻 Informações do Equipamento</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="tipo_equipamento" value="Desktop"> Desktop</label>
+                    <label><input type="checkbox" name="tipo_equipamento" value="Notebook"> Notebook</label>
+                    <label><input type="checkbox" name="tipo_equipamento" value="Servidor"> Servidor</label>
+                    <label><input type="checkbox" name="tipo_equipamento" value="Impressora"> Impressora</label>
+                    <label><input type="checkbox" name="tipo_equipamento" value="Periférico"> Periférico (Mouse, Teclado etc.)</label>
+                    <label><input type="checkbox" name="tipo_equipamento" value="Outro"> Outro: <input type="text" name="tipo_equipamento_outro" style="width:100px;"></label>
+                </div>
+                <input type="text" name="marca_modelo" placeholder="Marca e modelo" required><br>
+                <input type="text" name="numero_serie" placeholder="Número de série"><br>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="sistema_operacional" value="Windows"> Windows</label>
+                    <label><input type="checkbox" name="sistema_operacional" value="Linux"> Linux</label>
+                    <label><input type="checkbox" name="sistema_operacional" value="MacOS"> MacOS</label>
+                    <label><input type="checkbox" name="sistema_operacional" value="Outro"> Outro: <input type="text" name="so_outro" style="width:100px;"></label>
+                </div>
+                <div class="checkbox-group">
+                    <label><input type="radio" name="possui_backup" value="Sim" required> Sim</label>
+                    <label><input type="radio" name="possui_backup" value="Não"> Não</label>
+                    <label><input type="radio" name="possui_backup" value="Não se aplica"> Não se aplica</label>
+                </div>
+            </div>
+            <div class="form-section">
+                <label>⚠️ Problema Relatado</label>
+                <textarea name="problema_relatado" placeholder="Descreva com o máximo de detalhes o que está acontecendo com o equipamento" rows="4" required></textarea>
+            </div>
+            <div class="form-section">
+                <label>🛠️ Serviços Solicitados</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="servicos[]" value="Formatação / Reinstalação do sistema"> Formatação / Reinstalação do sistema</label>
+                    <label><input type="checkbox" name="servicos[]" value="Remoção de vírus"> Remoção de vírus</label>
+                    <label><input type="checkbox" name="servicos[]" value="Troca de peça / upgrade"> Troca de peça / upgrade</label>
+                    <label><input type="checkbox" name="servicos[]" value="Diagnóstico completo"> Diagnóstico completo</label>
+                    <label><input type="checkbox" name="servicos[]" value="Recuperação de dados"> Recuperação de dados</label>
+                    <label><input type="checkbox" name="servicos[]" value="Configuração de rede / Wi-Fi"> Configuração de rede / Wi-Fi</label>
+                    <label><input type="checkbox" name="servicos[]" value="Instalação de programas"> Instalação de programas</label>
+                    <label><input type="checkbox" name="servicos[]" value="Suporte remoto"> Suporte remoto</label>
+                    <label><input type="checkbox" name="servicos[]" value="Outro"> Outro: <input type="text" name="servico_outro" style="width:120px;"></label>
+                </div>
+            </div>
+            <div class="form-section termos">
+                <label>📋 Termos de Autorização</label>
+                <label><input type="checkbox" name="termo_diagnostico" required> Autorizo o diagnóstico técnico, ciente de que será cobrada uma taxa em caso de não aprovação do orçamento.</label>
+                <label><input type="checkbox" name="termo_dados" required> Estou ciente de que a empresa não se responsabiliza por dados não salvos.</label>
+                <label><input type="checkbox" name="termo_prazos" required> Concordo com os prazos e condições estabelecidos pela assistência técnica.</label>
+            </div>
+            <div class="assinatura-area">
+                <label>🕐 Data e Assinatura</label>
+                <input type="date" name="data_entrada" required> Data de entrada<br><br>
+                <input type="text" name="assinatura_cliente" placeholder="Assinatura do cliente" style="width: 300px;">
+            </div>
             <button type="submit">Registrar Atendimento</button>
+            <button type="button" class="print-btn" onclick="imprimirFormulario()">Imprimir</button>
         </form>
         <div style="text-align:center;margin-top:10px;">
             <a href="/">Voltar</a>
